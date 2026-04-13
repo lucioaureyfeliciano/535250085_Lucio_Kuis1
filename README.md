@@ -1,18 +1,36 @@
-# Backend Programming Template (2025)
+## Endpoint yang dapat diakses
 
-## Development Setup
+1. POST api/gacha
+   Digunakan untuk melakukan gacha/undian. dan lognya akan di catat di schema GachaLogs.
 
-1. Fork and clone this repository to your local computer.
-2. Open the project using VS Code.
-3. Install the recommended VS Code extensions: `ESLint` and `Prettier`.
-4. Copy and rename `.env.example` to `.env`. Open `.env` and change the database connection string.
-5. Run `npm install` to install the project dependencies.
-6. Run `npm run dev` to start the dev server.
-7. Test the endpoints in the API client app.
+   Input yang dibutuhkan berupa userId pada body
+   Contoh:
+   {
+   "userId": "69d5e83fd24967db8a6d2555"
+   }
 
-## Add New API Endpoints
+2. GET api/gacha/rewards
+   Digunakan untuk menampilkan daftar hadiah dan kuota pemenang yang tersisa untuk setiap hadiah.
 
-1. Create a new database schema in `./src/models`.
-2. Create a new folder in `./src/api/components` (if needed). Remember to separate your codes to repositories, services, controllers, and routes.
-3. Add the new route in `./src/api/routes.js`.
-4. Test your new endpoints in the API client app.
+3. POST api/gacha/rewards
+   Digunakan untuk menambahkan hadiah dan kuotanya ke schema Rewards.
+
+   Input yang dibutuhkan berupa name dan quota pada body
+   Contoh:
+   {
+   "name": "Pulsa Rp50.000",
+   "quota": 500
+   }
+
+4. GET api/gacha/logs
+   Digunakan untuk menampilkan semua histori/log gacha yang pernah dilakukan beserta hadiah yang dimenangkan (bila ada).
+
+5. GET api/gacha/logs/:userId
+   Digunakan untuk menampilkan histori/log gacha yang pernah dilakukan beserta hadiah yang dimenangkan (bila ada) dari user tertentu berdasarkan ID user.
+
+   Parameter yang dibutuhkan berupa userId
+   Contoh:
+   GET localhost:5000/api/gacha/logs/69dbc681e4ff3b263fac72b8
+
+6. GET api/gacha/winners
+   Digunakan untuk menampilkan daftar orang yang berhasil memenangkan setiap hadiahnya.
